@@ -54,6 +54,7 @@ void GameOfLife::evolve()
                     if (dx == 0 && dy == 0)
                         continue; // sich selbst überspringen
 
+                    // Maybe "+ width" and "+ height" can be removed
                     int nx = (x + dx + width) % width;   // toroidal: connect right/left parts of grig
                     int ny = (y + dy + height) % height; // toroidal: connect top/bottom
 
@@ -136,6 +137,7 @@ void GameOfLife::load(const std::string &filename)
 
     width = w;
     height = h;
+    // grid can be initialized without new_grid
     grid = new_grid;
 
     std::cout << "Welt aus " << filename << " geladen.\n";

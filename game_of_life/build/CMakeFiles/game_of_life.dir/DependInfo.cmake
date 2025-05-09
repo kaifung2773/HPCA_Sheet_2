@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/GameOfLife.cpp" "CMakeFiles/game_of_life.dir/src/GameOfLife.cpp.o" "gcc" "CMakeFiles/game_of_life.dir/src/GameOfLife.cpp.o.d"
-  "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/main.cpp" "CMakeFiles/game_of_life.dir/src/main.cpp.o" "gcc" "CMakeFiles/game_of_life.dir/src/main.cpp.o.d"
+  "/home/users8/bfgh/s7483605/Aufgaben/Ueb02/HPCA_Sheet_2/game_of_life/src/GameOfLife.cpp" "CMakeFiles/game_of_life.dir/src/GameOfLife.cpp.o" "gcc" "CMakeFiles/game_of_life.dir/src/GameOfLife.cpp.o.d"
+  "/home/users8/bfgh/s7483605/Aufgaben/Ueb02/HPCA_Sheet_2/game_of_life/src/main.cpp" "CMakeFiles/game_of_life.dir/src/main.cpp.o" "gcc" "CMakeFiles/game_of_life.dir/src/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
