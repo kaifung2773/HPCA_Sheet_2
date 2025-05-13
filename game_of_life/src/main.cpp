@@ -1,4 +1,5 @@
 #include "GameOfLife.hpp"
+#include "GameOfLifeCLI.hpp"
 #include <iostream>
 
 int main()
@@ -43,6 +44,9 @@ int main()
     // GameOfLife random(1, 1); // Dummy-Größe
     // random.load("testwelt.txt");
     // random.print();
+
+    GameOfLifeCLI cli;
+    cli.run();
 
     return 0;
 }

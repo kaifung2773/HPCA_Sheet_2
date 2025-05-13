@@ -11,4 +11,5 @@ include_directories(include)
 add_executable(game_of_life
     src/main.cpp
     src/GameOfLife.cpp
+    src/GameOfLifeCLI.cpp
 )
