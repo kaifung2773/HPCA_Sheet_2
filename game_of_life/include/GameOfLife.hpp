@@ -18,6 +18,8 @@ public: // class declaration (public) with constructor
     int get_width() const { return width; }
     int get_height() const { return height; }
 
+    GameOfLife(const std::string& filename);
+
 private: // private attributes
     int width;
     int height;

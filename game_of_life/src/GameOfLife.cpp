@@ -8,6 +8,11 @@ GameOfLife::GameOfLife(int width, int height)
     std::cout << "GameOfLife mit " << width << "x" << height << " erstellt." << std::endl;
 }
 
+GameOfLife::GameOfLife(const std::string& filename) {
+    load(filename);
+    std::cout << "GameOfLife aus Datei " << filename << " erstellt." << std::endl;
+}
+
 // print out grid
 void GameOfLife::print() const
 {
@@ -36,8 +41,14 @@ void GameOfLife::set_cell(int x, int y, int state)
 
 void GameOfLife::evolve()
 {
-    two_generations_ago = previous_generation;
-    previous_generation = grid;
+    // Only save history if we have previous data
+    if (!previous_generation.empty()) {
+        two_generations_ago = previous_generation;
+    }
+    
+    if (!grid.empty()) {
+        previous_generation = grid;
+    }
     std::vector<std::vector<int>> new_grid = grid; // copy for next generation
 
     for (int y = 0; y < height; ++y)
