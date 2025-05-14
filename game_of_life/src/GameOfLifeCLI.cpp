@@ -24,7 +24,7 @@ void GameOfLifeCLI::run()
         {
             break;
         }
-        else if (command == "help")
+        else if (command == "help") // CLI help menu
         {
             std::cout << "Verfügbare Befehle:\n";
             std::cout << "  help                     - Zeigt diese Hilfe\n";
@@ -47,7 +47,7 @@ void GameOfLifeCLI::run()
             std::cout << "  exit                     - Beendet das Programm\n";
         }
 
-        else if (command == "create")
+        else if (command == "create") // create world x,y
         {
             int w, h;
             if (iss >> w >> h)
@@ -62,9 +62,9 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'create <breite> <höhe>'\n";
             }
         }
-        else if (command == "set")
+        else if (command == "set") // set singe cell
         {
-            int x, y, state;
+            int x, y, state; // 2d
             if (iss >> x >> y >> state)
             {
                 if (game)
@@ -76,7 +76,7 @@ void GameOfLifeCLI::run()
                     std::cout << "Fehler: Es wurde noch keine Welt erstellt.\n";
                 }
             }
-            else
+            else // 1d with pos
             {
                 iss.clear();
                 iss.seekg(0);
@@ -110,7 +110,7 @@ void GameOfLifeCLI::run()
                 }
             }
         }
-        else if (command == "print")
+        else if (command == "print") // display world, deafult print on
         {
             int flag;
             if (iss >> flag)
@@ -121,7 +121,7 @@ void GameOfLifeCLI::run()
             }
             else if (game)
             {
-                game->print(); // falls kein Argument → direkt drucken
+                game->print(); // if no argument directly print
             }
             else
             {
@@ -129,7 +129,7 @@ void GameOfLifeCLI::run()
             }
         }
 
-        else if (command == "stability")
+        else if (command == "stability") // uses is_stable, default stability on
         {
             int flag;
             if (iss >> flag)
@@ -144,14 +144,14 @@ void GameOfLifeCLI::run()
             }
         }
 
-        else if (command == "run")
+        else if (command == "run") // run for round
         {
             int generations;
             if (iss >> generations)
             {
                 if (game)
                 {
-                    auto start = std::chrono::high_resolution_clock::now();
+                    auto start = std::chrono::high_resolution_clock::now(); // timing addedd
 
                     for (int i = 0; i < generations; ++i)
                     {
@@ -160,12 +160,12 @@ void GameOfLifeCLI::run()
                         if (print_enabled)
                         {
                             game->print();
-                            std::cout << "[Debug] Generation " << i << " gezeichnet\n";
+                            // std::cout << "[Debug] Generation " << i << " gezeichnet\n";
                             if (delay_ms > 0)
                                 std::this_thread::sleep_for(std::chrono::milliseconds(delay_ms));
                         }
 
-                        // Neu: Stabilitätsprüfung nach jeder Generation
+                        // debug dcheck stability after every round
                         if (stability_check_enabled && game->is_stable())
                         {
                             std::cout << "Welt ist stabil nach " << (i + 1) << " Generation(en).\n";
@@ -173,7 +173,7 @@ void GameOfLifeCLI::run()
                         }
                     }
 
-                    auto end = std::chrono::high_resolution_clock::now();
+                    auto end = std::chrono::high_resolution_clock::now(); // stop timing
                     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
                     std::cout << generations << " Generation(en) in " << duration.count() << " ms.\n";
@@ -188,7 +188,7 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'run <anzahl_generationen>'\n";
             }
         }
-        else if (command == "delay")
+        else if (command == "delay") // add dealy after each round, deafult = 0
         {
             int ms;
             if (iss >> ms)
@@ -201,9 +201,9 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'delay <millisekunden>'\n";
             }
         }
-        else if (command == "get")
+        else if (command == "get") // get single cell value
         {
-            int x, y;
+            int x, y; // 2d <- like set
             if (iss >> x >> y)
             {
                 if (game)
@@ -217,7 +217,7 @@ void GameOfLifeCLI::run()
                     std::cout << "Fehler: Es wurde noch keine Welt erstellt.\n";
                 }
             }
-            else
+            else // 1d pos
             {
                 iss.clear();
                 iss.seekg(0);
@@ -227,7 +227,7 @@ void GameOfLifeCLI::run()
                 {
                     if (game)
                     {
-                        // 1D-Zugriff: p = y * width + x
+                        // counter for 1d
                         int w = game->get_width();
                         int h = game->get_height();
                         if (p >= 0 && p < w * h)
@@ -253,7 +253,7 @@ void GameOfLifeCLI::run()
                 }
             }
         }
-        else if (command == "save")
+        else if (command == "save") // save world
         {
             std::string filename;
             if (iss >> filename)
@@ -272,7 +272,7 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'save <filename>'\n";
             }
         }
-        else if (command == "load")
+        else if (command == "load") // load world
         {
             std::string filename;
             if (iss >> filename)
@@ -280,7 +280,7 @@ void GameOfLifeCLI::run()
                 if (game)
                     delete game;
 
-                game = new GameOfLife(1, 1); // Dummy-Initialisierung
+                game = new GameOfLife(1, 1); // for testing
                 game->load(filename);
             }
             else
@@ -288,7 +288,7 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'load <filename>'\n";
             }
         }
-        else if (command == "glider")
+        else if (command == "glider") // create glider https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
         {
             int x, y;
             if (iss >> x >> y)
@@ -312,7 +312,7 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'glider <x> <y>'\n";
             }
         }
-        else if (command == "toad")
+        else if (command == "toad") // crewate toad: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
         {
             int x, y;
             if (iss >> x >> y)
@@ -341,7 +341,7 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'toad <x> <y>'\n";
             }
         }
-        else if (command == "beacon")
+        else if (command == "beacon") // create beacon: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
         {
             int x, y;
             if (iss >> x >> y)
@@ -351,13 +351,13 @@ void GameOfLifeCLI::run()
                     int w = game->get_width();
                     int h = game->get_height();
 
-                    // linke obere Ecke
+                    // lower left corner
                     game->set_cell((x + 0) % w, (y + 0) % h, 1);
                     game->set_cell((x + 1) % w, (y + 0) % h, 1);
                     game->set_cell((x + 0) % w, (y + 1) % h, 1);
                     game->set_cell((x + 1) % w, (y + 1) % h, 1);
 
-                    // rechte untere Ecke
+                    // upper right corner
                     game->set_cell((x + 2) % w, (y + 2) % h, 1);
                     game->set_cell((x + 3) % w, (y + 2) % h, 1);
                     game->set_cell((x + 2) % w, (y + 3) % h, 1);
@@ -375,7 +375,7 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'beacon <x> <y>'\n";
             }
         }
-        else if (command == "methuselah")
+        else if (command == "methuselah") // create methusela https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)
         {
             int x, y;
             if (iss >> x >> y)
@@ -385,7 +385,6 @@ void GameOfLifeCLI::run()
                     int w = game->get_width();
                     int h = game->get_height();
 
-                    // R-Pentomino
                     game->set_cell((x + 1) % w, y % h, 1);
                     game->set_cell((x + 2) % w, y % h, 1);
                     game->set_cell(x % w, (y + 1) % h, 1);
@@ -404,7 +403,7 @@ void GameOfLifeCLI::run()
                 std::cout << "Fehler: Benutze 'methuselah <x> <y>'\n";
             }
         }
-        else if (command == "random")
+        else if (command == "random") // add n random figures
         {
             int n;
             if (iss >> n)
