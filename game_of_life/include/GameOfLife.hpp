@@ -8,17 +8,17 @@ class GameOfLife
 {
 public: // class declaration (public) with constructor
     GameOfLife(int width, int height);
-    void print() const;                     // Gitter anzeigen
-    void set_cell(int x, int y, int state); // set cells
-    void evolve();
-    int get_cell(int x, int y) const;
+    void print() const;                     // show grid
+    void set_cell(int x, int y, int state); // set cell value at x,y
+    void evolve();                          // evolve once
+    int get_cell(int x, int y) const;       // get cell value at x,y
     void save(const std::string &filename) const;
     void load(const std::string &filename);
     bool is_stable();
     int get_width() const { return width; }
     int get_height() const { return height; }
 
-private: // private attributes
+private: // private attributes storing internal state of game
     int width;
     int height;
     std::vector<std::vector<int>> grid; // vector of vectors

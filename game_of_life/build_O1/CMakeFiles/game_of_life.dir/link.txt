@@ -1,0 +1,1 @@
+/usr/bin/c++ -O0 -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/game_of_life.dir/src/main.cpp.o CMakeFiles/game_of_life.dir/src/GameOfLife.cpp.o CMakeFiles/game_of_life.dir/src/GameOfLifeCLI.cpp.o -o game_of_life

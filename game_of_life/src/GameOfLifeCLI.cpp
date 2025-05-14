@@ -3,22 +3,22 @@
 #include <iostream>
 #include <sstream>
 #include <chrono>
-#include <cstdlib> // für rand(), srand()
-#include <ctime>   // für time()
+#include <cstdlib>
+#include <ctime>
 
 void GameOfLifeCLI::run()
 {
-    std::string line;
+    std::string line; // declare line as string for input
 
     std::cout << "Game of Life CLI gestartet. Tippe 'exit' zum Beenden.\n";
     while (true)
     {
-        std::cout << "> ";
-        std::getline(std::cin, line);
+        std::cout << "> ";            // await input
+        std::getline(std::cin, line); // userinput
 
-        std::istringstream iss(line);
+        std::istringstream iss(line); // transfomr to stream (iss) words separated by whitspce
         std::string command;
-        iss >> command;
+        iss >> command; // fist word ist command // following items will be parameters
 
         if (command == "exit")
         {
@@ -53,7 +53,7 @@ void GameOfLifeCLI::run()
             if (iss >> w >> h)
             {
                 if (game)
-                    delete game; // vorherige Welt löschen, wenn vorhanden
+                    delete game; // delete prev game
                 game = new GameOfLife(w, h);
                 std::cout << "Welt mit " << w << "x" << h << " erstellt.\n";
             }
@@ -479,7 +479,7 @@ void GameOfLifeCLI::run()
     std::cout << "Beendet.\n";
 }
 
-GameOfLifeCLI::~GameOfLifeCLI()
+GameOfLifeCLI::~GameOfLifeCLI() // destructor
 {
     if (game)
     {

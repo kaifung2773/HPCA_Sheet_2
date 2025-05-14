@@ -44,6 +44,7 @@ void GameOfLife::set_cell(int x, int y, int state)
 // Run one round of the game
 void GameOfLife::evolve()
 {
+    // tracking generations
     two_generations_ago = previous_generation;     // used for is_stable: two generations
     previous_generation = grid;                    // used in is_stable
     std::vector<std::vector<int>> new_grid = grid; // Copy for new generation

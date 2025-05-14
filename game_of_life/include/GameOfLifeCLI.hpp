@@ -3,19 +3,19 @@
 
 #include "GameOfLife.hpp"
 #include <string>
-#include <thread> // für sleep
+#include <thread> // forsleep
 
 class GameOfLifeCLI
 {
 public:
-    void run();       // Haupt-Loop
-    ~GameOfLifeCLI(); // Destruktor
+    void run();       // main-Loop for CLI
+    ~GameOfLifeCLI(); // Destructor
 
 private:
     GameOfLife *game = nullptr;
     bool print_enabled = true;
-    int delay_ms = 0;                    // Verzögerung in ms zwischen Generationen
-    bool stability_check_enabled = true; // aktiviert/deaktiviert is_stable()-Prüfung
+    int delay_ms = 0;                    // Delay between generations
+    bool stability_check_enabled = true; // activate is_stable
 };
 
 #endif // GAME_OF_LIFE_CLI_HPP

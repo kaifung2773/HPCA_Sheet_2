@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/build_O0",
+  "command": "/usr/bin/c++  -I/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/include -O0 -std=gnu++17 -arch arm64 -o CMakeFiles/game_of_life.dir/src/main.cpp.o -c /Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/main.cpp",
+  "file": "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/main.cpp",
+  "output": "CMakeFiles/game_of_life.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/build_O0",
+  "command": "/usr/bin/c++  -I/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/include -O0 -std=gnu++17 -arch arm64 -o CMakeFiles/game_of_life.dir/src/GameOfLife.cpp.o -c /Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/GameOfLife.cpp",
+  "file": "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/GameOfLife.cpp",
+  "output": "CMakeFiles/game_of_life.dir/src/GameOfLife.cpp.o"
+},
+{
+  "directory": "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/build_O0",
+  "command": "/usr/bin/c++  -I/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/include -O0 -std=gnu++17 -arch arm64 -o CMakeFiles/game_of_life.dir/src/GameOfLifeCLI.cpp.o -c /Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/GameOfLifeCLI.cpp",
+  "file": "/Users/leosteiner/Desktop/HPCA_Sheet_2/game_of_life/src/GameOfLifeCLI.cpp",
+  "output": "CMakeFiles/game_of_life.dir/src/GameOfLifeCLI.cpp.o"
+}
+]
