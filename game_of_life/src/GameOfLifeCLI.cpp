@@ -376,6 +376,7 @@ void GameOfLifeCLI::run()
             }
         }
         else if (command == "methuselah") // create methusela https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)
+        // https://conwaylife.com/wiki/R-pentomino
         {
             int x, y;
             if (iss >> x >> y)
