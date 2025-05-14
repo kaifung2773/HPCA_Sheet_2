@@ -8,25 +8,25 @@ GameOfLife::GameOfLife(int width, int height)
     std::cout << "GameOfLife mit " << width << "x" << height << " erstellt." << std::endl;
 }
 
-GameOfLife::GameOfLife(const std::string& filename) {
-    load(filename);
-    std::cout << "GameOfLife aus Datei " << filename << " erstellt." << std::endl;
-}
-
-// print out grid
 void GameOfLife::print() const
 {
-    for (const auto &row : grid)
+    std::cout << "\033[2J\033[H"; // Bildschirm löschen und Cursor zurücksetzen
+    std::cout.flush();
+
+    for (int y = 0; y < height; ++y)
     {
-        for (int cell : row)
+        for (int x = 0; x < width; ++x)
         {
-            std::cout << (cell ? "O" : ".") << " ";
+            if (grid[y][x] == 1)
+                std::cout << "\033[1m\033[32m\u2593\u2593\033[0m"; // grün lebendig
+            else
+                std::cout << "\033[1m\033[90m\u2591\u2591\033[0m"; // grau tot
         }
-        std::cout << "\n";
+        std::cout << '\n';
     }
+    std::cout.flush();
 }
 
-// for later use
 void GameOfLife::set_cell(int x, int y, int state)
 {
     if (y >= 0 && y < height && x >= 0 && x < width)
@@ -41,15 +41,9 @@ void GameOfLife::set_cell(int x, int y, int state)
 
 void GameOfLife::evolve()
 {
-    // Only save history if we have previous data
-    if (!previous_generation.empty()) {
-        two_generations_ago = previous_generation;
-    }
-    
-    if (!grid.empty()) {
-        previous_generation = grid;
-    }
-    std::vector<std::vector<int>> new_grid = grid; // copy for next generation
+    two_generations_ago = previous_generation;
+    previous_generation = grid;
+    std::vector<std::vector<int>> new_grid = grid; // Kopie für neue Generation
 
     for (int y = 0; y < height; ++y)
     {
@@ -57,7 +51,7 @@ void GameOfLife::evolve()
         {
             int alive_neighbors = 0;
 
-            // Check all 8 neighbouring cells
+            // 8 Nachbarn prüfen (mit toroidalem Verhalten)
             for (int dy = -1; dy <= 1; ++dy)
             {
                 for (int dx = -1; dx <= 1; ++dx)
@@ -65,9 +59,8 @@ void GameOfLife::evolve()
                     if (dx == 0 && dy == 0)
                         continue; // sich selbst überspringen
 
-                    // Maybe "+ width" and "+ height" can be removed
-                    int nx = (x + dx + width) % width;   // toroidal: connect right/left parts of grig
-                    int ny = (y + dy + height) % height; // toroidal: connect top/bottom
+                    int nx = (x + dx + width) % width;   // toroidal: links/rechts des gitters verbinden
+                    int ny = (y + dy + height) % height; // toroidal: oben/unten des gitters verbinden
 
                     alive_neighbors += grid[ny][nx];
                 }
@@ -75,12 +68,12 @@ void GameOfLife::evolve()
 
             if (grid[y][x] == 1)
             {
-                // living cell
+                // lebende Zelle
                 new_grid[y][x] = (alive_neighbors == 2 || alive_neighbors == 3) ? 1 : 0;
             }
             else
             {
-                // dead cell
+                // tote Zelle
                 new_grid[y][x] = (alive_neighbors == 3) ? 1 : 0;
             }
         }
@@ -89,7 +82,6 @@ void GameOfLife::evolve()
     grid = new_grid;
 }
 
-// for later use
 int GameOfLife::get_cell(int x, int y) const
 {
     if (y >= 0 && y < height && x >= 0 && x < width)
@@ -148,13 +140,11 @@ void GameOfLife::load(const std::string &filename)
 
     width = w;
     height = h;
-    // grid can be initialized without new_grid
     grid = new_grid;
 
     std::cout << "Welt aus " << filename << " geladen.\n";
 }
 
-// Usesd for is_stable, still need to work on is_stagble
 static bool grids_equal(const std::vector<std::vector<int>> &a,
                         const std::vector<std::vector<int>> &b)
 {
@@ -168,7 +158,6 @@ static bool grids_equal(const std::vector<std::vector<int>> &a,
     return true;
 }
 
-// still need to work on is_stagble
 bool GameOfLife::is_stable()
 {
     // Stillleben: aktuelle == vorherige Generation
